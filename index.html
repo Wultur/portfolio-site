@@ -19,6 +19,59 @@
 
    gtag('config', 'G-HNWCCE3DBL');
  </script>
+  <!-- Scripts for contact form -->
+ <script src="https://www.google.com/recaptcha/api.js"></script>
+ <script>
+  function submitToAPI(e) {
+       e.preventDefault();
+       var endpoint = "https://gdk9i8nljk.execute-api.us-east-1.amazonaws.com/prod/contact-me";
+
+            var Namere = /[A-Za-z]{1}[A-Za-z]/;
+            if (!Namere.test($("#name-input").val())) {
+                         alert ("Name can not less than 2 char");
+                return;
+            }
+
+            if ($("#email-input").val()=="") {
+                alert ("Please enter your email id");
+                return;
+            }
+
+            var reeamil = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
+            if (!reeamil.test($("#email-input").val())) {
+                alert ("Please enter valid email address");
+                return;
+            }
+
+       var data = {
+          name : $("#name-input").val(),
+          email : $("#email-input").val(),
+          desc : $("#description-input").val()
+        };
+
+        $.ajax({
+         type: "POST",
+         url : endpoint,
+         dataType: "json",
+         contentType: "application/json; charset=utf-8",
+         headers: {
+          "x-api-key": "ldfI8qRp1F9QDwxZSslOZ4KX5zYPYMlt5CMNxWOm"
+         },
+         data: JSON.stringify(data),
+
+         success: function () {
+           // clear form and show a success message
+           alert("Successfull");
+           document.getElementById("contact-form").reset();
+           location.reload();
+         },
+         errors: function () {
+           // show an error message
+           alert("UnSuccessfull");
+         }});
+  }
+ </script>
+
 </head>
 <body>
 
@@ -151,6 +204,9 @@
                 <a href="http://malchauskas.ru">
                   <h3>This site in S3 >></h3>
                   <p>Static site deployed in S3 bucket in AWS.</p>
+                  <p>With CloudFront, AWS Certificate Manager,</p>
+                  <p>API Gateway, Lambda Function (Python),</p>
+                  <p>Simple Email Service, Route 53.</p>
                 </a>
                 <img src="assets/img/about-visual.png" alt="About Us">
               </div>
@@ -162,14 +218,19 @@
                 <div class="modal">
                   <div class="modal--information">
                     <p>Bobruisk, Belarus</p>
-                    <a href="">Page under construction</a>
-                    <a href="">Works only link to LinkedIn</a>
-                    <a href="tel:"></a>
                   </div>
                   <ul class="modal--options">
                     <li><a href="https://www.linkedin.com/in/pavel-malchauskas/" target="_blank">LinkedIn</a></li>
-                    <li><a href=""</a></li>
                   </ul>
+                  <form id="contact-form" method="post">
+                    <p>Name:</p>
+                    <input type="text" style="height:35px; background-color:black;" id="name-input" placeholder="Enter name here…" class="form-control" style="width:100%;" /><br/>
+                    <p>Email:</p>
+                    <input type="email" style="height:35px; background-color:black;" id="email-input" placeholder="Enter email here…" class="form-control" style="width:100%;"/><br/>
+                    <p>Message:</p>
+                    <textarea id="description-input" rows="3" placeholder="Enter your message…" class="form-control" style="width:100%; background-color:black;"></textarea><br/>
+                    <button onClick="submitToAPI(event)" class="g-recaptcha" data-sitekey="6LdNLaUdAAAAAKrQt8r_SAqA_4Q3usG6e6OObeH9" data-callback='onSubmit' data-action='submit' style="margin-top:20px; background-color:black;">Submit</button>
+                  </form>
                 </div>
               </div>
             </div>
