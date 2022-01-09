@@ -28,5 +28,7 @@ jobs:
         run: ls -la
       
       - name: Run a aws s3 syncronization
-        run: |
-          aws s3 sync . ${{ secrets.AWS_S3_BUCKET }} --exclude "*Lambda*" --exclude "*Polices*" --exclude "*.git*" --delete
+        run: aws s3 sync . ${{ secrets.AWS_S3_BUCKET }} --exclude "*Lambda*" --exclude "*Polices*" --exclude "*.git*" --delete
+        
+      - name: Create CloudFront Invalidation
+        run: aws cloudfront create-invalidation --distribution-id E321IT3446SGDG --paths "*"
