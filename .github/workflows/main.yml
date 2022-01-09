@@ -16,9 +16,6 @@ jobs:
     steps:
       - name: Clone current repo
         uses: actions/checkout@v1
-        
-      - name: AWS check
-        run: aws --version
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -32,8 +29,4 @@ jobs:
       
       - name: Run a aws s3 syncronization
         run: |
-          aws s3 sync . ${{ secrets.AWS_S3_BUCKET }} \
-          --exclude "*Lambda*" \
-          --exclude "*Polices*" \ 
-          --exclude "*.git*" \
-          --delete
+          aws s3 sync . ${{ secrets.AWS_S3_BUCKET }} --exclude "*Lambda*" --exclude "*Polices*" --exclude "*.git*" --delete
