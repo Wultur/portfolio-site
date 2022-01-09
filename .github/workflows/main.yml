@@ -29,8 +29,8 @@ jobs:
       
       - name: Run a aws s3 syncronization
         run: |
-          aws s3 sync . "${{ secrets.AWS_S3_BUCKET }}" \
-          --exclude "LambdaFunctionSendEmail.*" \
-          --exclude "PolicesForSendEmailSES.json" \ 
+          aws s3 sync . ${{ secrets.AWS_S3_BUCKET }} \
+          --exclude "*Lambda*" \
+          --exclude "*Polices*" \ 
           --exclude "*.git*" \
           --delete
