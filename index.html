@@ -29,7 +29,7 @@
  <script>
   function submitToAPI(e) {
        e.preventDefault();
-       var endpoint = "https://gdk9i8nljk.execute-api.us-east-1.amazonaws.com/prod/contact-me";
+       var endpoint = "https://https://d17vqkwd5y8xy7.cloudfront.net";
 
             var Namere = /[A-Za-z]{1}[A-Za-z]/;
             if (!Namere.test($("#name-input").val())) {
@@ -59,9 +59,6 @@
          url : endpoint,
          dataType: "json",
          contentType: "application/json; charset=utf-8",
-         headers: {
-          "x-api-key": "ldfI8qRp1F9QDwxZSslOZ4KX5zYPYMlt5CMNxWOm"
-         },
          data: JSON.stringify(data),
 
          success: function () {
