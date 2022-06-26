@@ -22,11 +22,6 @@
   <!-- Scripts for contact form -->
  <script src="https://www.google.com/recaptcha/api.js"></script>
  <script>
-  function onSubmit(token) {
-    document.getElementById("contact-form").submit();
-  }
-</script>
- <script>
   function submitToAPI(e) {
        e.preventDefault();
        var endpoint = "https://gdk9i8nljk.execute-api.us-east-1.amazonaws.com/prod/contact-me";
